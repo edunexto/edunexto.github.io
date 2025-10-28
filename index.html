@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduNexto</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #0c1022;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* Navbar */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 80px;
+      background-color: #182149;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      width: 25px;
+      height: 25px;
+      background: linear-gradient(45deg, #ff00cc, #3347ff);
+      border-radius: 6px;
+    }
+
+    .logo-text {
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 40px;
+      transition: all 0.4s ease;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    nav ul li a:hover {
+      color: #ff4b8b;
+    }
+
+    /* Hamburger Menu */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 25px;
+      height: 20px;
+      cursor: pointer;
+      z-index: 101;
+    }
+
+    .menu-toggle div {
+      width: 100%;
+      height: 3px;
+      background: white;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    /* Hero Section */
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 100px 80px;
+      flex-wrap: wrap;
+    }
+
+    .hero-text {
+      max-width: 500px;
+    }
+
+    .hero-text h1 {
+      font-size: 60px;
+      line-height: 1.2;
+    }
+
+    .hero-text button {
+      margin-top: 30px;
+      background: linear-gradient(45deg, #ff00cc, #3333ff);
+      border: none;
+      color: white;
+      padding: 14px 40px;
+      border-radius: 30px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .hero-text button:hover {
+      transform: scale(1.05);
+    }
+
+    .hero-image img {
+      width: 350px;
+      border-radius: 25px;
+      box-shadow: 0 0 40px rgba(92, 0, 255, 0.5);
+    }
+
+    /* Features Section */
+    .features {
+      text-align: center;
+      padding: 80px 60px;
+      background-color: #11152b;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s ease;
+    }
+
+    .features.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .features h2 {
+      font-size: 40px;
+      margin-bottom: 40px;
+      color: #fff;
+    }
+
+    .feature-boxes {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .feature {
+      background-color: #1a1f3a;
+      padding: 30px;
+      border-radius: 20px;
+      width: 300px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .feature:hover {
+      transform: translateY(-10px);
+      background-color: #242b4f;
+    }
+
+    .feature h3 {
+      color: #ff4b8b;
+      margin-bottom: 15px;
+    }
+
+    /* Contact Section */
+    .contact {
+      padding: 80px 60px;
+      text-align: center;
+      background-color: #0c1022;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s ease;
+    }
+
+    .contact.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .contact h2 {
+      font-size: 40px;
+      margin-bottom: 40px;
+    }
+
+    .contact form {
+      max-width: 500px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .contact input, .contact textarea {
+      padding: 14px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      background-color: #1a1f3a;
+      color: white;
+      font-size: 16px;
+    }
+
+    .contact button {
+      background: linear-gradient(45deg, #ff00cc, #3333ff);
+      border: none;
+      padding: 14px;
+      color: white;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .contact button:hover {
+      transform: scale(1.05);
+    }
+
+    /* Footer */
+    footer {
+      background-color: #2b0066;
+      text-align: center;
+      padding: 20px;
+      margin-top: 50px;
+      color: #ffffff;
+      font-size: 14px;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 900px) {
+      nav {
+        padding: 20px 40px;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      nav ul {
+        position: fixed;
+        top: 0;
+        right: -250px;
+        width: 220px;
+        height: 100vh;
+        background-color: #182149;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        transition: right 0.4s ease;
+      }
+
+      nav ul.active {
+        right: 0;
+      }
+
+      nav ul li a {
+        font-size: 18px;
+      }
+
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 60px 20px;
+      }
+
+      .hero-text h1 {
+        font-size: 40px;
+      }
+
+      .hero-image img {
+        margin-top: 40px;
+        width: 280px;
+      }
+
+      .features, .contact {
+        padding: 60px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">
+      <div class="logo-icon"></div>
+      <div class="logo-text">EduNexto</div>
+    </div>
+
+    <div class="menu-toggle" id="menu-toggle">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+    <ul id="menu">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-text">
+      <h1>Available All Academic<br>Course Of Bangladesh</h1>
+      <button>Buy Now</button>
+    </div>
+    <div class="hero-image">
+      <img src="images/phone.jpg" alt="Phone Image">
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <h2>Awesome Features</h2>
+    <div class="feature-boxes">
+      <div class="feature">
+        <h3>Fast Performance</h3>
+        <p>Experience smooth and super-fast loading speed for all users.</p>
+      </div>
+      <div class="feature">
+        <h3>Modern Design</h3>
+        <p>Clean, stylish, and mobile-friendly layouts for any device.</p>
+      </div>
+      <div class="feature">
+        <h3>Secure Platform</h3>
+        <p>We keep your data safe with end-to-end encryption technology.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact" id="contact">
+    <h2>Contact Us</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea rows="5" placeholder="Your Message"></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 EduNexto. All rights reserved.
+  </footer>
+
+  <!-- Script -->
+  <script>
+    // Section Animation
+    const sections = document.querySelectorAll('.features, .contact');
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('show');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    sections.forEach(sec => observer.observe(sec));
+
+    // Mobile Menu Toggle
+    const toggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('menu');
+
+    toggle.addEventListener('click', () => {
+      menu.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>
